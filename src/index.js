@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 5000;
 
 //import models
 require("./models/user");
+require("./models/event");
 
 //import routers
 const authRouter = require("./routers/auth");
