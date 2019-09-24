@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.use(requireAuth);
 
-router.get("./events", async (req, res) => {
+router.get("/events", async (req, res) => {
   const event = await Event.find({ userId: req.user._id });
   return res.send(event);
 });
@@ -16,13 +16,18 @@ router.get("./events", async (req, res) => {
 router.post("/events", async (req, res) => {
   try {
     const { title, datetime } = req.body;
+    console.log(new Date(datetime));
     if (!title || !datetime) {
       return res
         .status(422)
         .send({ error: "Please provide a title and datetime" });
     }
 
-    const event = new Event({ title, datetime, userId: req.user._id });
+    const event = new Event({
+      title,
+      datetime: new Date(datetime),
+      userId: req.user._id
+    });
     await event.save();
     return res.send(event);
   } catch (error) {
