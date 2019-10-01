@@ -18,7 +18,6 @@ const requireAuth = (req, res, next) => {
 
     const { id } = payload;
     const user = await User.findById(id);
-    console.log(payload);
     req.user = user;
     next();
   });

@@ -10,6 +10,7 @@ require("./models/event");
 //import routers
 const authRouter = require("./routers/auth");
 const eventRouter = require("./routers/event");
+const pushTokenRouter = require("./routers/pushToken");
 
 //import middleware
 const requireAuth = require("./middleware/requireAuth");
@@ -20,6 +21,7 @@ var app = express();
 app.use(bodyParser.json());
 app.use(authRouter);
 app.use(eventRouter);
+app.use(pushTokenRouter);
 
 const mongoURI = process.env.DB_STRING;
 
