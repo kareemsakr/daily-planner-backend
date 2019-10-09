@@ -9,7 +9,9 @@ const router = express.Router();
 router.use(requireAuth);
 
 router.get("/events", async (req, res) => {
-  const event = await Event.find({ userId: req.user._id });
+  const event = await Event.find({ userId: req.user._id }).sort({
+    datetime: 1
+  });
   return res.send(event);
 });
 
